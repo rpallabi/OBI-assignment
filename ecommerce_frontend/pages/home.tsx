@@ -46,6 +46,11 @@ export default function Home() {
         <div className='col-md-10'></div>
         <div className='col-md-2'> <button type="button" className="btn btn-outline-secondary"><Link href="/addProducts" className="nav-link">Add products</Link></button>
         </div>
+      </div><br></br>
+      <div className='row'>
+        <div className='col-md-10'></div>
+        <div className='col-md-2'> <button type="button" className="btn btn-outline-secondary"><Link href="/DeleteProduct" className="nav-link">Delete products</Link></button>
+        </div>
       </div>
     </>
   );

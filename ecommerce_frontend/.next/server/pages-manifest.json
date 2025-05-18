@@ -1,1 +1,9 @@
-{"/addProducts":"pages/addProducts.html","/_app":"pages/_app.js","/create-customer":"pages/create-customer.html","/_error":"pages/_error.js","/history":"pages/history.html","/cart":"pages/cart.html","/":"pages/index.html","/login":"pages/login.html","/products":"pages/products.html","/home":"pages/home.html","/_document":"pages/_document.js","/404":"pages/404.html"}
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/home": "pages/home.js",
+  "/products": "pages/products.js",
+  "/addProducts": "pages/addProducts.js",
+  "/cart": "pages/cart.js"
+}

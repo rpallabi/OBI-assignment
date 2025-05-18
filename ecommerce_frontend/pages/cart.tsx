@@ -5,21 +5,31 @@ import Navbar from '../components/Navbar';
 export default function Cart() {
   const [cart, setCart] = useState<any[]>([]);
   const [customerId, setCustomerId] = useState('');
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastType, setToastType] = useState<'success' | 'danger'>('success');
 
   useEffect(() => {
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {
       setCart(JSON.parse(savedCart));
-      console.log('Cart loaded:', JSON.parse(savedCart));
     }
 
     const user = sessionStorage.getItem('userData');
     if (user) {
       const parsedUser = JSON.parse(user);
       setCustomerId(parsedUser.id);
-      console.log('User loaded:', parsedUser);
     }
   }, []);
+
+  const showTemporaryToast = (message: string, type: 'success' | 'danger') => {
+    setToastMessage(message);
+    setToastType(type);
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 1000);
+  };
 
   const checkout = async () => {
     const transformedCart = cart.map(item => ({
@@ -33,12 +43,12 @@ export default function Cart() {
         items: transformedCart,
       });
 
-      alert('Order placed successfully!');
+      showTemporaryToast('Order placed successfully!', 'success');
       localStorage.removeItem('cart');
       setCart([]);
     } catch (error) {
       console.error('Checkout failed:', error);
-      alert('Failed to place the order. Please try again.');
+      showTemporaryToast('Failed to place the order. Please try again.', 'danger');
     }
   };
 
@@ -77,6 +87,25 @@ export default function Cart() {
             </div>
           </>
         )}
+      </div>
+
+      {/* Bootstrap Toast */}
+      <div
+        className="position-fixed bottom-0 end-0 p-3"
+        style={{ zIndex: 9999 }}
+      >
+        <div
+          className={`toast align-items-center text-white bg-${toastType} border-0 ${showToast ? 'show' : 'hide'}`}
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+        >
+          <div className="d-flex">
+            <div className="toast-body">
+              {toastMessage}
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
